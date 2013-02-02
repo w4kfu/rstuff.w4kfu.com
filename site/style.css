@@ -1,0 +1,127 @@
+
+h1, h2, h3, h4, h5, h6 {margin:15px 0 10px 0;}
+h1 {font-size:180%;}
+h2 {margin:5px 0; font-size:160%;}
+h3 {font-size:120%;}
+h4, h5 {font-size:100%;}
+
+body, div, span, div.paragraph, a, img, ul, ol, li, caption, table, thead, tbody, tfoot, tr, th, td, form, fieldset, legend, label, dl, dt, dd, blockquote, applet, object, h1, h2, h3, h4, h5 {border:0;}
+body, div, span, p, a, img, ul, ol, li, caption, table, thead, tbody, tfoot, tr, th, td, form, fieldset, legend, label, dl, dt, dd, blockquote, applet, object, h1, h2, h3, h4, h5 {border:0;}
+body {font:0.8em/1.5 "arial", serif; text-align:center;}
+body {background:#2f2f2f; color:#222;}
+
+.main {width:850px; margin:0 auto; text-align:left;}
+.main.bg {background-color:#FFF;}
+
+.noscreen {display:none;}
+#content {padding:25px 20px; min-height:400px; height:auto !important; height:400px;}
+.content-in {padding:10px 15px;}
+
+.box {min-height:1px;}
+.box {_height:1%;}
+.box:after {display:block; visibility:hidden; clear:both; line-height:0; font-size:0; content:".";}
+.box ul {margin:15px 0; padding:0; list-style:none;}
+.box ul li {margin:0; padding:2px 0 3px 0;}
+
+#header {
+	margin:0;
+	background:#444 none repeat scroll 0 0;
+	border-bottom:12px solid #CCCCCC;
+	font-size:2.25em;
+	padding:5px 10px 5px;
+	color:#FFFFFF;
+}
+#header a {
+	color:#FFFFFF;
+	display:block;
+}
+#header a:hover {
+	color:#8b2;
+}
+
+#menu {
+	color:#000;
+	float:left;
+	font-size:x-small;
+	line-height:200%;
+	margin:0 0 2em;
+	padding:0 0 0 20em;
+	width:18.5em;
+}
+
+#menu strong {
+	color:#FFF;
+}
+#menu a:hover, #content a:hover {
+	color:#8b2;
+}
+
+.menu, .sousmenu{
+	text-align:center;
+	font-weight:bold;
+	text-decoration:none;	
+}
+.menu{
+background-color:#444;
+border:2px solid #111;
+font-weight:normal;
+}
+.sousmenu{
+background-color:#000;
+border:2px solid #111;
+color:#000;
+padding:2px;
+text-transform:uppercase;
+}
+
+.menu a{
+color:#FFF;
+}
+.sousmenu a{
+color:#CCC;
+}
+.menu a:hover, .sousmenu a:hover, .menu a:active, .sousmenu a:active, .menu a:focus, .sousmenu a:focus{
+	color:#8b2;
+}
+
+#footer {clear:both; padding:15px;font:12px Verdana, Arial, Helvetica, sans-serif;}
+#footer {background:#2f2f2f; color:#FFF;}
+#footer a {color:#AFAFAF;}
+#footer a:hover {color:#FFF;}
+
+pre {
+	background:#F5F5F5 none repeat scroll 0 0;
+	border:1px solid #808080;
+	margin:0.5em 2em;
+	overflow:auto;
+	padding:0.5em;
+	text-align:left;
+	width:85%;
+}
+
+pre code  {
+	color:#330000;
+	font-family:"Courier New",monospace;
+	font-size:1.1em;
+}
+.ida {
+	background:#2d2d2d none repeat scroll 0 0;
+	border:5px solid #808080;
+	margin:0.5em 2em;
+	overflow:auto;
+	padding:0.5em;
+	text-align:left;
+	width:85%;	
+}
+
+#content ul
+{
+	list-style-type:none;
+	padding-left:30px;
+}
+
+#content li
+{
+	background:transparent url(/lili.gif) no-repeat scroll 0px 8px;
+	padding-left:10px;
+}

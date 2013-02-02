@@ -1,0 +1,74 @@
+$$ title
+
+.SND File format
+
+$$ body
+
+This page will deal with .snd file format that can be found in Heroes of Might and Magic 3
+
+## Snd Format
+
+* +0x00 : NbWavFile (DWORD)
+* +0x04 : First WavEntry
+* +0x34 : Second WavEntry
+* ... Repeat NbWavFile
+* +0x.. : WavFile
+
+## Wav Entry
+
+* +0x00 : NameFile (BYTE [40])
+* +0x28 : Offset (DWORD)
+* +0x2C : Size (DWORD)
+
+## Example (H3ab\_ahd.snd)
+
+	+0x00000000 : 75 00 00 00 41 7A 75 72 61 74 74 6B 00 77 61 76 
+	+0x00000010 : 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+	+0x00000020 : 00 00 00 00 00 00 00 00 00 00 00 00 F4 15 00 00 
+	+0x00000030 : 48 32 00 00
+
+* Number of Wav File : 0x75 (117) 
+* NameFile           : Azurattk.wav (Be careful "." is \x00)
+* Offset             : 0x000015F4 (5620)
+* Size               : 0x00003248 (12872)
+
+### Entry of Azurattk.wav file :
+
+	+0x000015F4 : 52 49 46 46 40 32 00 00 57 41 56 45 66 6D 74 20 
+	+0x00001604 : 14 00 00 00 11 00 01 00 22 56 00 00 5C 2B 00 00 
+	+0x00001614 : 00 02 04 00 02 00 F9 03 66 61 63 74 04 00 00 00 
+	+0x00001624 : 60 63 00 00 64 61 74 61 0C 32 00 00
+
+* FileTypeBlocID : "RIFF"  (0x52,0x49,0x46,0x46)
+* FileSize       : Size - 8 bytes
+* FileFormatID   : "WAVE"  (0x57,0x41,0x56,0x45)
+...
+
+<pre class="ida"><code><span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00598590
+.text:00598590 </span><span style="color:#ffd200">loc_598590</span><span style="color:#c0c0c0">:
+</span><span style="color:#666666">.text:00598590 </span><span style="color:white">lea     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ebp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NumberOfBytesRead</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00598593 </span><span style="color:white">push    </span><span style="color:#d25032">0               </span><span style="color:#ffc5f3">; lpOverlapped
+</span><span style="color:#666666">.text:00598595 </span><span style="color:white">push    </span><span style="color:#73adad">ecx             </span><span style="color:#ffc5f3">; lpNumberOfBytesRead
+</span><span style="color:#666666">.text:00598596 </span><span style="color:white">push    </span><span style="color:#d25032">4               </span><span style="color:#ffc5f3">; nNumberOfBytesToRead
+</span><span style="color:#666666">.text:00598598 </span><span style="color:white">push    </span><span style="color:#ababab">offset </span><span style="color:#ebebb9">NbWavEntry </span><span style="color:#ffc5f3">; lpBuffer
+</span><span style="color:#666666">.text:0059859D </span><span style="color:white">push    </span><span style="color:#73adad">eax             </span><span style="color:#ffc5f3">; hFile
+</span><span style="color:#666666">.text:0059859E </span><span style="color:white">call    </span><span style="color:#73adad">ebx </span><span style="color:#666666">; </span><span style="color:#ff5afd">ReadFile
+</span><span style="color:#666666">.text:005985A0 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">NbWavEntry
+</span><span style="color:#666666">.text:005985A5 </span><span style="color:white">lea     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">+</span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">*2+</span><span style="color:#d25032">6</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:005985A9 </span><span style="color:white">shl     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">4
+</span><span style="color:#666666">.text:005985AC </span><span style="color:white">push    </span><span style="color:#73adad">edx             </span><span style="color:#ffc5f3">; unsigned int
+</span><span style="color:#666666">.text:005985AD </span><span style="color:white">call    </span><span style="color:#00ffff">??2@YAPAXI@Z    </span><span style="color:#82607e">; operator new(uint)
+</span><span style="color:#666666">.text:005985B2 </span><span style="color:white">add     </span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">4
+</span><span style="color:#666666">.text:005985B5 </span><span style="color:white">lea     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ebp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NumberOfBytesRead</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:005985B8 </span><span style="color:white">mov     </span><span style="color:#ebebb9">TabWavEntry</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:005985BD </span><span style="color:white">push    </span><span style="color:#d25032">0               </span><span style="color:#ffc5f3">; lpOverlapped
+</span><span style="color:#666666">.text:005985BF </span><span style="color:white">push    </span><span style="color:#73adad">ecx             </span><span style="color:#ffc5f3">; lpNumberOfBytesRead
+</span><span style="color:#666666">.text:005985C0 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">NbWavEntry
+</span><span style="color:#666666">.text:005985C6 </span><span style="color:white">lea     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">+</span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">*2]
+</span><span style="color:#666666">.text:005985C9 </span><span style="color:white">shl     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">4
+</span><span style="color:#666666">.text:005985CC </span><span style="color:white">push    </span><span style="color:#73adad">edx             </span><span style="color:#ffc5f3">; nNumberOfBytesToRead
+</span><span style="color:#666666">.text:005985CD </span><span style="color:white">push    </span><span style="color:#73adad">eax             </span><span style="color:#ffc5f3">; lpBuffer
+</span><span style="color:#666666">.text:005985CE </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">HFile
+</span><span style="color:#666666">.text:005985D3 </span><span style="color:white">push    </span><span style="color:#73adad">eax             </span><span style="color:#ffc5f3">; hFile
+</span><span style="color:#666666">.text:005985D4 </span><span style="color:white">call    </span><span style="color:#73adad">ebx </span><span style="color:#666666">; </span><span style="color:#ff5afd">ReadFile
+</span></code></pre>

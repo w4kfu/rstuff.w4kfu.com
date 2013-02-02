@@ -42,7 +42,7 @@ This sub check if the position in the buffer is not superior at the size of the 
 
 If not it will memcpy from the buffer into first argument of length described by second argument.
 
-	if (this->PosBuffer + arg2LengthToCopy <= this->SizePacket)
+	if (this->PosBuffer + ARG2_LengthToCopy <= this->SizePacket)
 	{
 		memcpy(*ARG1_Buffer, &this->Buffer[this->PosBuffer], ARG2_LengthToCopy);
 		this->PosBuffer += ARG2_LengthToCopy;

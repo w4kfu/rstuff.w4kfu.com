@@ -48,7 +48,7 @@ This page will deal with .lod file format that can be found in Heroes of Might a
 * Unknown : Who care ?
 * h3file[10000]
 
-### h3file[0]
+### h3file\[0]
 
 * Name : "ab.h3c"
 * Offset  : 0x04E25C (320092)
@@ -56,7 +56,7 @@ This page will deal with .lod file format that can be found in Heroes of Might a
 * Type : 0x01
 * CompSize : 0x00 (If equal zero the files is stored directly, not compressed)
 
-### h3file[1]
+### h3file\[1]
 
 * Name : "AdvEvent.txt"
 * Offset  : 0x81831 (530481)
@@ -82,15 +82,35 @@ This page will deal with .lod file format that can be found in Heroes of Might a
 * ".h3c" ; Type = [ 1 ]
 * ".txt" ; Type = [ 2 ]
 
-## Example h3file[1] "AdvEvent.txt" (Compressed)
+## Example h3file\[1] "AdvEvent.txt" (Compressed)
 
 
-	+0x00081830  00 78 9C D5 5C 5B 8F 1C B7 95 7E 37 B0 FF A1 34   xœÕ\[..·•~7°ÿ¡4
-	+0x00081840  80 A0 04 68 0B CE 06 79 C9 8B 30 96 23 4B 9B 68  € .h.Î.yÉ‹0–#K›h
-	+0x00081850  E3 95 C6 2B E8 91 5D C5 EE A2 A7 AA 58 26 AB A6  ã•Æ+è‘]Åî¢§ªX&«¦
-	+0x00081860  D5 36 F6 BF EF F7 9D 43 D6 A5 A7 47 1E EB 62 27  Õ6ö¿ï÷.CÖ¥§G.ëb'
+	+0x00081830  00 78 9C D5 5C 5B 8F 1C B7 95 7E 37 B0 FF A1 34
+	+0x00081840  80 A0 04 68 0B CE 06 79 C9 8B 30 96 23 4B 9B 68
+	+0x00081850  E3 95 C6 2B E8 91 5D C5 EE A2 A7 AA 58 26 AB A6
+	+0x00081860  D5 36 F6 BF EF F7 9D 43 D6 A5 A7 47 1E EB 62 27
 
-*(WORD*)0x00081830 == 0x789C // ZLIB, See section 2.2 in [rfc1950][1].
 
+0x00081831 == 0x789C // ZLIB, See section 2.2 in [rfc1950][1].
+
+### Read Header
+
+<pre class="ida"><code><span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:004FA96A </span><span style="color:white">push    </span><span style="color:#73adad">ecx             </span><span style="color:#ffc5f3">; File
+</span><span style="color:#666666">.text:004FA96B </span><span style="color:white">push    </span><span style="color:#d25032">1               </span><span style="color:#ffc5f3">; Count
+</span><span style="color:#666666">.text:004FA96D </span><span style="color:white">push    </span><span style="color:#d25032">5Ch             </span><span style="color:#ffc5f3">; ElementSize
+</span><span style="color:#666666">.text:004FA96F </span><span style="color:white">push    </span><span style="color:#73adad">edx             </span><span style="color:#ffc5f3">; DstBuf
+</span><span style="color:#666666">.text:004FA970 </span><span style="color:white">call    </span><span style="color:#ffd200">Wrapper_fread
+</span></code></pre>
+
+### Read h3 File
+
+<pre class="ida"><code><span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:004FAA2C </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">178h</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:004FAA32 </span><span style="color:white">mov     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">180h</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:004FAA38 </span><span style="color:white">push    </span><span style="color:#73adad">eax             </span><span style="color:#ffc5f3">; File
+</span><span style="color:#666666">.text:004FAA39 </span><span style="color:white">push    </span><span style="color:#73adad">ecx             </span><span style="color:#ffc5f3">; Count
+</span><span style="color:#666666">.text:004FAA3A </span><span style="color:white">push    </span><span style="color:#d25032">20h             </span><span style="color:#ffc5f3">; ElementSize
+</span><span style="color:#666666">.text:004FAA3C </span><span style="color:white">push    </span><span style="color:#73adad">edx             </span><span style="color:#ffc5f3">; DstBuf
+</span><span style="color:#666666">.text:004FAA3D </span><span style="color:white">call    </span><span style="color:#ffd200">Wrapper_fread
+</span></code></pre>
 
 [1]:http://tools.ietf.org/html/rfc1950

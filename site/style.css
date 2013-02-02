@@ -112,6 +112,8 @@ pre code  {
 	padding:0.5em;
 	text-align:left;
 	width:85%;	
+	font-family:"Lucida Console",monospace;
+	font-size:0.9em;	
 }
 
 #content ul

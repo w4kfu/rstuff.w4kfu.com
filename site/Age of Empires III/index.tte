@@ -1,0 +1,49 @@
+$$ title
+
+Age Of Empires III
+
+$$ body
+
+Age Of Empires III
+
+CPacket         struc ; (sizeof=0x434)
+
+No check of the number of block of 0x10 to memcpy...
+
+<pre class="ida"><code><span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00AB9709                 </span><span style="color:white">test    </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00AB970B                 </span><span style="color:white">jle     </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_AB974E
+</span><span style="color:#666666">.text:00AB970D                 </span><span style="color:white">lea     </span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">edi</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">21Ch</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00AB9713                 </span><span style="color:white">lea     </span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00AB9716
+.text:00AB9716 </span><span style="color:#ffd200">loc_AB9716</span><span style="color:#c0c0c0">:                             </span><span style="color:#ffaa7f">; CODE XREF: sub_AB96E7+65j
+</span><span style="color:#666666">.text:00AB9716                 </span><span style="color:white">lea     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">-</span><span style="color:#d25032">200h</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00AB971C                 </span><span style="color:white">push    </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00AB971E                 </span><span style="color:white">lea     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">14h</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">arg_0</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00AB9722                 </span><span style="color:white">mov     </span><span style="color:#c0c0c0">[</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">14h</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">arg_0</span><span style="color:#c0c0c0">], </span><span style="color:#73adad">ecx
+</span><span style="color:#666666">.text:00AB9726                 </span><span style="color:white">push    </span><span style="color:#73adad">edx
+</span><span style="color:#666666">.text:00AB9727                 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">esi
+</span><span style="color:#666666">.text:00AB9729                 </span><span style="color:white">call    </span><span style="color:#ffd200">sub_92311C
+</span><span style="color:#666666">.text:00AB972E                 </span><span style="color:white">push    </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00AB9730                 </span><span style="color:white">lea     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">14h</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">arg_0</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00AB9734                 </span><span style="color:white">push    </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00AB9735                 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">esi
+</span><span style="color:#666666">.text:00AB9737                 </span><span style="color:white">mov     </span><span style="color:#c0c0c0">[</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">18h</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">arg_0</span><span style="color:#c0c0c0">], </span><span style="color:#73adad">ebx
+</span><span style="color:#666666">.text:00AB973B                 </span><span style="color:white">call    </span><span style="color:#ffd200">sub_92311C
+</span><span style="color:#666666">.text:00AB9740                 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">edi</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">41Ch</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00AB9746                 </span><span style="color:white">inc     </span><span style="color:#73adad">ebp
+</span><span style="color:#666666">.text:00AB9747                 </span><span style="color:white">add     </span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00AB974A                 </span><span style="color:white">cmp     </span><span style="color:#73adad">ebp</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00AB974C                 </span><span style="color:white">jl      </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_AB9716
+</span></code></pre>
+
+### sub_92311C
+
+This sub check if the position in the buffer is not superior at the size of the packet received.
+
+If not it will memcpy from the buffer into first argument of length described by second argument.
+
+	if (this->PosBuffer + arg2LengthToCopy <= this->SizePacket)
+	{
+		memcpy(*ARG1_Buffer, &this->Buffer[this->PosBuffer], ARG2_LengthToCopy);
+		this->PosBuffer += ARG2_LengthToCopy;
+	}

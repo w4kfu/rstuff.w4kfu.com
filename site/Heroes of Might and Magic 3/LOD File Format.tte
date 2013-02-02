@@ -1,0 +1,96 @@
+$$ title
+
+.LOD File Format
+
+$$ body
+
+This page will deal with .lod file format that can be found in Heroes of Might and Magic 3
+
+## LOD Header
+
+* +0x00 : Magic 	(DWORD) 	// "LOD" : 0x00444f4c
+* +0x04 : Type		(DWORD)
+* +0x08 : NbFile	(DWORD)
+* +0x0C : Unknown	(BYTE [80])
+* +0x5C : h3file	(struct h3file[10000])
+
+## H3 File Struct
+
+* +0x00 : Name 		(BYTE [16])
+* +0x10 : Offset	(DWORD)
+* +0x14 : RealSize	(DWORD)
+* +0x18 : Type		(DWORD)
+* +0x1C : CompSize	(DWORD)
+
+## Example (H3ab\_bmp.lod)
+
+	+0x00000000  4c 4f 44 00 f4 01 00 00  bb 09 00 00 00 00 00 00  |LOD.............|
+	+0x00000010  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+	*
+	+0x00000050  00 00 00 00 00 00 00 00  00 00 00 00 61 62 2e 68  |............ab.h|
+	+0x00000060  33 63 00 00 10 00 10 00  01 01 01 01 5c e2 04 00  |3c..........\...|
+	+0x00000070  d5 35 03 00 01 00 00 00  00 00 00 00 41 64 76 45  |.5..........AdvE|
+	+0x00000080  76 65 6e 74 2e 74 78 74  00 01 01 01 31 18 08 00  |vent.txt....1...|
+	+0x00000090  72 5b 00 00 02 00 00 00  78 1d 00 00 41 72 5f 42  |r[......x...Ar_B|
+	+0x000000a0  67 2e 70 63 78 00 09 0e  d4 f4 c0 81 a9 35 08 00  |g.pcx........5..|
+	+0x000000b0  0c f9 15 00 11 00 00 00  ce b0 0b 00 41 72 41 5f  |............ArA_|
+	+0x000000c0  43 6f 42 6c 2e 70 63 78  00 f4 c0 81 77 e6 13 00  |CoBl.pcx....w...|
+	+0x000000d0  8c 13 00 00 10 00 00 00  3e 0e 00 00 41 72 41 5f  |........>...ArA_|
+	+0x000000e0  43 6f 42 72 2e 70 63 78  00 f4 c0 81 b5 f4 13 00  |CoBr.pcx........|
+	+0x000000f0  8c 13 00 00 10 00 00 00  3c 0e 00 00 41 72 41 5f  |........<...ArA_|
+	+0x00000100  43 6f 47 72 2e 70 63 78  00 f4 c0 81 f1 02 14 00  |CoGr.pcx........|
+	
+### Header
+
+* Magic : 0x00444f4c 
+* Type  : 0x1F4 (500)
+* NbFile: 0x9BB (2491)
+* Unknown : Who care ?
+* h3file[10000]
+
+### h3file[0]
+
+* Name : "ab.h3c"
+* Offset  : 0x04E25C (320092)
+* RealSize: 0x0335D5 (210389)
+* Type : 0x01
+* CompSize : 0x00 (If equal zero the files is stored directly, not compressed)
+
+### h3file[1]
+
+* Name : "AdvEvent.txt"
+* Offset  : 0x81831 (530481)
+* RealSize: 0x5b72 (23410)
+* Type : 0x02
+* CompSize : 0x1d78 (7544)
+
+## Type h3 File
+
+* ".PAL" ; Type = [ 96 ]
+* ".ifr" ; Type = [ 1 ]
+* ".pal" ; Type = [ 96 ]
+* ".H3C" ; Type = [ 1 ]
+* ".xmi" ; Type = [ 1 ]
+* ".FNT" ; Type = [ 80 ]
+* ".fnt" ; Type = [ 80 ]
+* ".TXT" ; Type = [ 2 ]
+* ".PCX" ; Type = [ 17, 16 ]
+* ".pcx" ; Type = [ 16, 17 ]
+* ".DEF" ; Type = [ 73, 66, 64, 67, 68, 71 ]
+* ".msk" ; Type = [ 79 ]
+* ".def" ; Type = [ 70, 73, 66, 64, 65, 67, 69, 68, 71 ]
+* ".h3c" ; Type = [ 1 ]
+* ".txt" ; Type = [ 2 ]
+
+## Example h3file[1] "AdvEvent.txt" (Compressed)
+
+
+	+0x00081830  00 78 9C D5 5C 5B 8F 1C B7 95 7E 37 B0 FF A1 34   xœÕ\[..·•~7°ÿ¡4
+	+0x00081840  80 A0 04 68 0B CE 06 79 C9 8B 30 96 23 4B 9B 68  € .h.Î.yÉ‹0–#K›h
+	+0x00081850  E3 95 C6 2B E8 91 5D C5 EE A2 A7 AA 58 26 AB A6  ã•Æ+è‘]Åî¢§ªX&«¦
+	+0x00081860  D5 36 F6 BF EF F7 9D 43 D6 A5 A7 47 1E EB 62 27  Õ6ö¿ï÷.CÖ¥§G.ëb'
+
+*(WORD*)0x00081830 == 0x789C // ZLIB, See section 2.2 in [rfc1950][1].
+
+
+[1]:http://tools.ietf.org/html/rfc1950

@@ -97,12 +97,12 @@ pre {
 	padding:0.5em;
 	text-align:left;
 	width:85%;
+	font-family:"Courier New",monospace;
+	font-size:1.1em;	
 }
 
 pre code  {
 	color:#330000;
-	font-family:"Courier New",monospace;
-	font-size:1.1em;
 }
 .ida {
 	background:#2d2d2d none repeat scroll 0 0;
@@ -113,7 +113,6 @@ pre code  {
 	text-align:left;
 	width:85%;	
 	font-family:"Lucida Console",monospace;
-	font-size:0.9em;	
 }
 
 #content ul

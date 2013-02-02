@@ -34,7 +34,7 @@ No check of the number of block of 0x10 to memcpy...
 </span><span style="color:#666666">.text:00AB9747                 </span><span style="color:white">add     </span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">10h
 </span><span style="color:#666666">.text:00AB974A                 </span><span style="color:white">cmp     </span><span style="color:#73adad">ebp</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
 </span><span style="color:#666666">.text:00AB974C                 </span><span style="color:white">jl      </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_AB9716
-</span></code></pre>
+</span></span></code></pre>
 
 ### sub_92311C
 

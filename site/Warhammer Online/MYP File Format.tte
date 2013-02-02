@@ -1,0 +1,142 @@
+$$ title
+
+.MYP File Format
+
+$$ body
+
+This page will deal with .myp file format that can be found in Warhammer Online
+
+### MYP Header (size = 0x24)
+<pre><code>+0x00 : DWORD magic; ( 0x0050594d )
++0x04 : DWORD version;
++0x08 : DWORD byteorder;
++0x0C : DWORD addr_filetable_LW;
++0x10 : DWORD addr_filetable_HI;
++0x14 : DWORD nb_file;
++0x18 : DWORD all_nb_file;
++0x1C : DWORD nb_filetable;
++0x20 : DWORD nb_filetable2;</code></pre>
+
+Example :
+<pre><code>00000000   4D 59 50 00 05 00 00 00  43 EC 23 FD 00 02 00 00
+00000010   00 00 00 00 E8 03 00 00  D9 05 00 00 03 00 00 00
+00000020   03 00 00 00</code></pre>
+
+
+<pre><code>.text:00979F8D                 lea     edi, [ebx+125h]
+.text:00979F93                 mov     ecx, [edi]
+.text:00979F95                 mov     eax, offset off_AE3380 ; "MYP\0"
+.text:00979F9A                 cmp     ecx, [eax]
+.text:00979F9C                 jz      short magic_ok</code></pre>
+
+<pre><code>.text:00979FCD                 mov     eax, [ebx+12Dh]
+.text:00979FD3                 mov     ecx, 0FD23EC43h
+.text:00979FD8                 cmp     eax, ecx
+.text:00979FDA                 mov     byte ptr [esp+40h+orderbyte_marker], 1
+.text:00979FDF                 jz      short orderbyte_marker_ok</code></pre>
+
+### FileTable Header (size = 0x1C)
+
+<pre><code>+0x00 : DWORD nb_entry;
++0x04 : DWORD offset_LW;
++0x08 : DWORD offset_HI;</code></pre>
+
+Example :
+<pre><code>00000200   6E 06 00 00 00 00 00 00  00 00 00 00 A8 DC 00 00
+00000210   00 00 00 00 88 00 00 00  BD 22 00 00</code></pre>
+
+### File Entry (size = 0x22)
+
+<pre><code>+0x00 : DWORD offset_LW;
++0x04 : DWORD offset_HI;
++0x08 : DWORD size_header;
++0x0C : DWORD cmp_size;
++0x10 : DWORD ucmp_size;
++0x14 : BYTE  name[0x8];
++0x1C : DWORD crc;
++0x20 : WORD  compressed;</code></pre>
+
+<pre><code>.text:0097F164                 mov     eax, [esp+40h+buffer_file_table]
+.text:0097F168                 imul    eax, 22h</code></pre>
+Size for each file entry is definitively 0x22
+
+### Hash LUA ?
+
+All files are indexed by their hash
+<pre><code>.text:0091BB3E ; unsigned int __fastcall hash_lua(int buffer, int seed_NS, unsigned int buffer_len)</code></pre>
+This sub looks like hash only for LUA interface not gamecore ?!
+
+Example :
+
+<pre><code>printf("%08X\n", hash_lua("Interface/InterfaceCore/InterfaceCorePreload.xml", 0x67520592, strlen("Interface/InterfaceCore/InterfaceCorePreload.xml")));
+...
+0x28648D3B</code></pre>
+
+### Hash FileName
+
+<pre><code>.text:00994330 ; int __cdecl hash_filename_0(char *Buffer, int Size_Buffer, int *Hash_high, int *Hash_low)</code></pre>
+
+
+<pre><code>CPU Stack
+Address   Value      ASCII Comments
+0018F648  [0062841F  ; RETURN from WAR.00994330 to WAR.0062841F
+0018F64C  /3D9B5478  ; Arg1 = ASCII "assetdb/fixtures/it.0.0.gs_axe_1h_t1_01.nif"
+0018F650  |0000002B  ; Arg2 = 2B
+0018F654  |3D2D7BE4  ; Arg3 = 3D2D7BE4
+0018F658  |3D2D7BE8  ; Arg4 = 3D2D7BE8</code></pre>
+
+### File entry example
+
+File : world.myp
+
+Name : "assetdb/regions/0.8.distant.nif"
+
+Hash : 05FBF9ECDD8EA010
+
+<pre><code>[+] FileEntry Information
+Offset Low = 0x73BD9DB
+Offset High = 0x0
+Unknow = 0x88
+Compressed Size = 0x1E501
+Uncompressed Size = 0x3AB05
+Name = 5FBF9ECDD8EA010
+CRC = 0x3CB25597
+Is compressed</code></pre>
+
+<pre><code>073BD9D0                                     04 00 84 00 00
+073BD9E0   02 00 80 CF 16 09 6D 21  B5 92 F4 45 EB 79 5A D8
+073BD9F0   D9 17 87 39 13 7D 60 06  16 A3 C0 52 3F 53 B1 84
+073BDA00   93 D5 8D 7A F7 58 96 AC  55 F4 3D 95 8C 85 80 72
+073BDA10   FD 6D 00 3A BB 1D B2 23  85 A3 B4 2E CF 3C 0C F6
+073BDA20   77 EC 91 B8 A8 0F F1 78  9A AE 25 0E B9 21 3F 10
+073BDA30   27 45 53 20 79 5A 28 98  CD 07 70 93 6C 60 79 7D
+073BDA40   5A E2 15 96 53 9F 2C E1  EE 82 0F 94 E2 F7 B7 F5
+073BDA50   33 77 63 9D 47 FD E8 C3  09 BF 23 54 19 08 6B 51
+073BDA60   54 97 4C 78 9C</code></pre>
+
+78 9C == ZLIB
+
+<pre><code>>>> hex(0x073BDA63 -  0x73BD9DB)
+'0x88'</code></pre>
+
+<pre><code>+0x00 : WORD unknow_0
++0x02 : WORD offset_data;
++0x04 : ...
++0x88</code></pre>
+
+<pre><code>> strings test.out
+Gamebryo File Format, Version 20.3.0.9
+NiNode
+NiTriShape
+NiTriShapeData
+fardraw
+terrain
+zone 100
+MythicColorShader
+zone 180
+zone 181
+zone 128
+zone 106
+zone 129
+fixtures
++T6G</code></pre>

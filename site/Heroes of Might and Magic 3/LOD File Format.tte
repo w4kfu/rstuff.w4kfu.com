@@ -83,7 +83,7 @@ This page will deal with .lod file format that can be found in Heroes of Might a
 </span><span style="color:#666666">.text:004FA96D </span><span style="color:white">push    </span><span style="color:#d25032">5Ch             </span><span style="color:#ffc5f3">=> ElementSize
 </span><span style="color:#666666">.text:004FA96F </span><span style="color:white">push    </span><span style="color:#73adad">edx             </span><span style="color:#ffc5f3">=> DstBuf
 </span><span style="color:#666666">.text:004FA970 </span><span style="color:white">call    </span><span style="color:#ffd200">Wrapper_fread
-</span></div>
+</span></span></div>
 
 ### Read h3 File
 
@@ -95,7 +95,7 @@ This page will deal with .lod file format that can be found in Heroes of Might a
 </span><span style="color:#666666">.text:004FAA3A </span><span style="color:white">push    </span><span style="color:#d25032">20h             </span><span style="color:#ffc5f3">=> ElementSize
 </span><span style="color:#666666">.text:004FAA3C </span><span style="color:white">push    </span><span style="color:#73adad">edx             </span><span style="color:#ffc5f3">=> DstBuf
 </span><span style="color:#666666">.text:004FAA3D </span><span style="color:white">call    </span><span style="color:#ffd200">Wrapper_fread
-</span></div>
+</span></span></div>
 
 ## Type h3 File
 

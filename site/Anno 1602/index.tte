@@ -1,0 +1,154 @@
+$$ title
+
+Anno 1602
+
+$$ body
+
+Hello this is Anno 1602 page
+
+## No CD
+
+sub_488D60 must return 1.
+
+## BSH File Format
+
+### Header
+
+* +0x00 : Magic 	(DWORD) 	// "BSH" : 0x00485342
+* +0x04 : Unknow1	(DWORD)
+* +0x08 : Unknow2	(DWORD)
+* +0x0C : Unknow3	(DWORD)
+* +0x10 : FileSize 	(DWORD)		// Substract Sizeof (Header)
+
+<div class="ida">
+<span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00490900
+.text:00490900
+.text:00490900
+.text:00490900 </span><span style="color:#ffecbb">; int __cdecl ReadHeader(void *DstBuf, FILE *File)
+</span><span style="color:#666666">.text:00490900 </span><span style="color:#9dd600">ReadHeader proc near
+</span><span style="color:#666666">.text:00490900
+.text:00490900 </span><span style="color:#ff8000">DstBuf</span><span style="color:#c0c0c0">= </span><span style="color:#ababab">dword ptr  </span><span style="color:#d25032">4
+</span><span style="color:#666666">.text:00490900 </span><span style="color:#ff8000">File</span><span style="color:#c0c0c0">= </span><span style="color:#ababab">dword ptr  </span><span style="color:#d25032">8
+</span><span style="color:#666666">.text:00490900
+.text:00490900 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">File</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00490904 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">DstBuf</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00490908 </span><span style="color:white">push    </span><span style="color:#73adad">eax             </span><span style="color:#ffc5f3">; File
+</span><span style="color:#666666">.text:00490909 </span><span style="color:white">push    </span><span style="color:#d25032">14h             </span><span style="color:#ffc5f3">; Count
+</span><span style="color:#666666">.text:0049090B </span><span style="color:white">push    </span><span style="color:#d25032">1               </span><span style="color:#ffc5f3">; ElementSize
+</span><span style="color:#666666">.text:0049090D </span><span style="color:white">push    </span><span style="color:#73adad">ecx             </span><span style="color:#ffc5f3">; DstBuf
+</span><span style="color:#666666">.text:0049090E </span><span style="color:white">call    </span><span style="color:#73adad">ds</span><span style="color:#c0c0c0">:</span><span style="color:#ff5afd">fread
+</span><span style="color:#666666">.text:00490914 </span><span style="color:white">add     </span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00490917 </span><span style="color:white">retn
+</span><span style="color:#666666">.text:00490917 </span><span style="color:#9dd600">ReadHeader endp
+</span><span style="color:#666666">.text:00490917
+</span></div>
+
+#### Example "tools8.bsh"
+
+	+0x00000000  42 53 48 00 B4 E1 40 00 40 00 00 00 FF 5E 40 00
+	+0x00000010  04 8D 12 00 80 0A 00 00 4C 97 01 00 A8 99 01 00
+
+* Magic   : 0x00485342
+* Unknow1 : 0x0040E1B4
+* Unknow2 : 0x00000040
+* Unknow3 : 0x00405EFF
+* FileSize: 0x00128D04
+
+### Offset Entry
+
+At offset sizeof (Header), we can found a table of Offset for each entry
+
+### Example "tools8.bsh"
+
+	+0x00000000  42 53 48 00 B4 E1 40 00 40 00 00 00 FF 5E 40 00
+	+0x00000010  04 8D 12 00 80 0A 00 00 4C 97 01 00 A8 99 01 00
+	
+* OffsetEntry[0] : 0x00000A80 + sizeof (Header)
+* OffsetEntry[1] : 0x0001974C + sizeof (Header)
+
+### Entry
+
+#### First Entry
+
+	+0x00000A90              C8 00 00 00 58 02 00 00 01 00 00 00
+	+0x00000AA0  CC 8C 01 00 00 C8 EE EA EE EE EA EA EE F0 EE F3
+
+
+* Width : 0xC8 (200)
+* Height : 0x258 (600)
+* Type : 0x01
+* Offset Next Entry : 0x00018CCC + Offset Actual Entry
+
+#### Second Entry
+
+	+0x00019760  1A 00 00 00 21 00 00 00 01 00 00 00 5C 02 00 00
+	+0x00019770  00 0B D5 EA D5 EA D5 EA EA EA EE EA D5 FE 00 0B
+
+
+* Width : 0x1A (26)
+* Height : 0x21 (33)
+* Type : 0x01
+* Offset Next Entry : 0x25C + Offset Actual Entry
+
+### Type
+
+<div class="ida">
+<span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00401B10 </span><span style="color:#ffecbb">; int __cdecl sub_401B10(int NumFile, int NumEntry, int, int)
+</span><span style="color:#666666">.text:00401B10 </span><span style="color:#9dd600">sub_401B10      proc near               </span><span style="color:#ffaa7f">; CODE XREF: sub_407A70+16Ep
+</span><span style="color:#666666">.text:00401B10                                         </span><span style="color:#ffaa7f">; sub_409A50+73p ...
+</span><span style="color:#666666">.text:00401B10
+.text:00401B10 </span><span style="color:#ff8000">NumFile         </span><span style="color:#c0c0c0">= </span><span style="color:#ababab">dword ptr  </span><span style="color:#d25032">4
+</span><span style="color:#666666">.text:00401B10 </span><span style="color:#ff8000">NumEntry        </span><span style="color:#c0c0c0">= </span><span style="color:#ababab">dword ptr  </span><span style="color:#d25032">8
+</span><span style="color:#666666">.text:00401B10 </span><span style="color:#ff8000">NS_PosX         </span><span style="color:#c0c0c0">= </span><span style="color:#ababab">dword ptr  </span><span style="color:#d25032">0Ch
+</span><span style="color:#666666">.text:00401B10 </span><span style="color:#ff8000">NS_PosY         </span><span style="color:#c0c0c0">= </span><span style="color:#ababab">dword ptr  </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00401B10
+.text:00401B10                 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NumFile</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B14                 </span><span style="color:white">mov     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NumEntry</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B18                 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">lpAddress</span><span style="color:#c0c0c0">[</span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">*8]
+</span><span style="color:#666666">.text:00401B1F                 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">+</span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">*4]
+</span><span style="color:#666666">.text:00401B22                 </span><span style="color:white">add     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">ecx
+</span><span style="color:#666666">.text:00401B24                 </span><span style="color:white">movsx   </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, </span><span style="color:#ababab">byte ptr </span><span style="color:#c0c0c0">[</span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">8</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B28                 </span><span style="color:white">dec     </span><span style="color:#73adad">ecx
+</span><span style="color:#666666">.text:00401B29                 </span><span style="color:white">jz      </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_401B4E
+</span><span style="color:#666666">.text:00401B2B                 </span><span style="color:white">dec     </span><span style="color:#73adad">ecx
+</span><span style="color:#666666">.text:00401B2C                 </span><span style="color:white">jz      </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_401B34
+</span><span style="color:#666666">.text:00401B2E                 </span><span style="color:white">sub     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">4
+</span><span style="color:#666666">.text:00401B31                 </span><span style="color:white">jz      </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_401B4E
+</span><span style="color:#666666">.text:00401B33                 </span><span style="color:white">retn
+</span><span style="color:#666666">.text:00401B34 ; -------------------------------------------------------------------
+.text:00401B34
+.text:00401B34 </span><span style="color:#ffd200">loc_401B34</span><span style="color:#c0c0c0">:                             </span><span style="color:#ffaa7f">; CODE XREF: sub_401B10+1Cj
+</span><span style="color:#666666">.text:00401B34                 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NS_PosY</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B38                 </span><span style="color:white">mov     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NS_PosX</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B3C                 </span><span style="color:white">push    </span><span style="color:#73adad">ecx
+</span><span style="color:#666666">.text:00401B3D                 </span><span style="color:white">push    </span><span style="color:#73adad">edx
+</span><span style="color:#666666">.text:00401B3E                 </span><span style="color:white">push    </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00401B3F                 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">dword_72D0C0
+</span><span style="color:#666666">.text:00401B44                 </span><span style="color:white">push    </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00401B45                 </span><span style="color:white">call    </span><span style="color:#ffd200">sub_403670
+</span><span style="color:#666666">.text:00401B4A                 </span><span style="color:white">add     </span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00401B4D                 </span><span style="color:white">retn
+</span><span style="color:#666666">.text:00401B4E ; -------------------------------------------------------------------
+.text:00401B4E
+.text:00401B4E </span><span style="color:#ffd200">loc_401B4E</span><span style="color:#c0c0c0">:                             </span><span style="color:#ffaa7f">; CODE XREF: sub_401B10+19j
+</span><span style="color:#666666">.text:00401B4E                                         </span><span style="color:#ffaa7f">; sub_401B10+21j
+</span><span style="color:#666666">.text:00401B4E                 </span><span style="color:white">mov     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NS_PosY</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B52                 </span><span style="color:white">mov     </span><span style="color:#73adad">edx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NS_PosX</span><span style="color:#c0c0c0">]
+</span><span style="color:#666666">.text:00401B56                 </span><span style="color:white">push    </span><span style="color:#73adad">ecx
+</span><span style="color:#666666">.text:00401B57                 </span><span style="color:white">push    </span><span style="color:#73adad">edx
+</span><span style="color:#666666">.text:00401B58                 </span><span style="color:white">push    </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00401B59                 </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">dword_72D0C0
+</span><span style="color:#666666">.text:00401B5E                 </span><span style="color:white">push    </span><span style="color:#73adad">eax
+</span><span style="color:#666666">.text:00401B5F                 </span><span style="color:white">call    </span><span style="color:#ffd200">sub_403DE0
+</span><span style="color:#666666">.text:00401B64                 </span><span style="color:white">add     </span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">10h
+</span><span style="color:#666666">.text:00401B67                 </span><span style="color:white">retn
+</span><span style="color:#666666">.text:00401B67 </span><span style="color:#9dd600">sub_401B10      endp
+</span><span style="color:#666666">.text:00401B67
+.text:00401B67 ; -------------------------------------------------------------------
+</span></div>
+
+If the type equal 2 sub_403670 will be called, whereas type equal 1 or 6 sub_403DE0 is called.
+
+#### sub_403670
+
+#### sub_403DE0

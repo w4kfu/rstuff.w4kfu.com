@@ -44,7 +44,8 @@ This page will deal with .snd file format that can be found in Heroes of Might a
 * FileFormatID   : "WAVE"  (0x57,0x41,0x56,0x45)
 ...
 
-<pre class="ida"><code><span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00598590 </span><span style="color:#ffd200">loc_598590</span><span style="color:#c0c0c0">:
+<div class="ida">
+<span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00598590 </span><span style="color:#ffd200">loc_598590</span><span style="color:#c0c0c0">:
 </span><span style="color:#666666">.text:00598590 </span><span style="color:white">lea     </span><span style="color:#73adad">ecx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">ebp</span><span style="color:#c0c0c0">+</span><span style="color:#ff8000">NumberOfBytesRead</span><span style="color:#c0c0c0">]
 </span><span style="color:#666666">.text:00598593 </span><span style="color:white">push    </span><span style="color:#d25032">0               </span><span style="color:#ffc5f3">; lpOverlapped
 </span><span style="color:#666666">.text:00598595 </span><span style="color:white">push    </span><span style="color:#73adad">ecx             </span><span style="color:#ffc5f3">; lpNumberOfBytesRead
@@ -70,4 +71,4 @@ This page will deal with .snd file format that can be found in Heroes of Might a
 </span><span style="color:#666666">.text:005985CE </span><span style="color:white">mov     </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#ebebb9">HFile
 </span><span style="color:#666666">.text:005985D3 </span><span style="color:white">push    </span><span style="color:#73adad">eax             </span><span style="color:#ffc5f3">; hFile
 </span><span style="color:#666666">.text:005985D4 </span><span style="color:white">call    </span><span style="color:#73adad">ebx </span><span style="color:#666666">; </span><span style="color:#ff5afd">ReadFile
-</span></code></pre>
+</span></div>

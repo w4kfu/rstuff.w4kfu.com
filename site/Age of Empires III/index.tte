@@ -10,7 +10,8 @@ CPacket         struc ; (sizeof=0x434)
 
 No check of the number of block of 0x10 to memcpy...
 
-<pre class="ida"><code><span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00AB9709                 </span><span style="color:white">test    </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
+<div class="ida">
+<span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d"><span style="color:#666666">.text:00AB9709                 </span><span style="color:white">test    </span><span style="color:#73adad">eax</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
 </span><span style="color:#666666">.text:00AB970B                 </span><span style="color:white">jle     </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_AB974E
 </span><span style="color:#666666">.text:00AB970D                 </span><span style="color:white">lea     </span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">edi</span><span style="color:#c0c0c0">+</span><span style="color:#d25032">21Ch</span><span style="color:#c0c0c0">]
 </span><span style="color:#666666">.text:00AB9713                 </span><span style="color:white">lea     </span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">, [</span><span style="color:#73adad">esp</span><span style="color:#c0c0c0">]
@@ -34,7 +35,8 @@ No check of the number of block of 0x10 to memcpy...
 </span><span style="color:#666666">.text:00AB9747                 </span><span style="color:white">add     </span><span style="color:#73adad">ebx</span><span style="color:#c0c0c0">, </span><span style="color:#d25032">10h
 </span><span style="color:#666666">.text:00AB974A                 </span><span style="color:white">cmp     </span><span style="color:#73adad">ebp</span><span style="color:#c0c0c0">, </span><span style="color:#73adad">eax
 </span><span style="color:#666666">.text:00AB974C                 </span><span style="color:white">jl      </span><span style="color:#ababab">short </span><span style="color:#ffd200">loc_AB9716
-</span></span></code></pre>
+</span></span>
+</div>
 
 ### sub_92311C
 

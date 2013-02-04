@@ -41,7 +41,7 @@ sub_488D60 must return 1.
 </span><span style="color:#666666">.text:00490917 </span><span style="color:white">retn
 </span><span style="color:#666666">.text:00490917 </span><span style="color:#9dd600">ReadHeader endp
 </span><span style="color:#666666">.text:00490917
-</span></div>
+</span></span></div>
 
 #### Example "tools8.bsh"
 

@@ -151,4 +151,26 @@ If the type equal 2 sub_403670 will be called, whereas type equal 1 or 6 sub_403
 
 #### sub_403670
 
+Currently I have found no file of type 2.
+
 #### sub_403DE0
+
+I have found only file of type 1 in the following list :
+
+* Bauhaus.bsh : 1043 Entry
+* BAUSHIP.BSH : 4 Entry
+* EDITOR.BSH : 957 Entry
+* Effekte.bsh : 675 Entry
+* fische.bsh : 584 Entry
+* gaukler.bsh : 384 Entry
+* Maeher.bsh : 1312 Entry
+* Numbers.bsh : 10 Entry
+* schatten.bsh : 76 Entry
+* Ship.bsh : 368 Entry
+* Soldat.bsh : 4016 Entry
+* Stadtfld.bsh : 5964 Entry
+* START.BSH : 90 Entry
+* SYMBOL.BSH : 3 Entry
+* Tiere.bsh : 720 Entry
+* TOOLS.BSH : 672 Entry
+* Traeger.bsh : 1784

@@ -19,7 +19,7 @@ body {background:#2f2f2f; color:#222;}
 
 }
 
-.main {width:80%; margin:0 auto; text-align:left;}
+.main {width:70%; margin:0 auto; text-align:left;}
 .main.bg {background-color:#FFF;}
 
 .noscreen {display:none;}
@@ -53,7 +53,7 @@ body {background:#2f2f2f; color:#222;}
 	float:left;
 	font-size:x-small;
 	line-height:200%;
-	width:15.5em;
+	width:20em;
 	margin:0 auto; text-align:left;
 }
 

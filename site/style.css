@@ -10,7 +10,16 @@ body, div, span, p, a, img, ul, ol, li, caption, table, thead, tbody, tfoot, tr,
 body {font:0.8em/1.5 "arial", serif; text-align:center;}
 body {background:#2f2f2f; color:#222;}
 
-.main {width:850px; margin:0 auto; text-align:left;}
+#contener {
+
+	margin: 0 auto;
+	text-align: left;
+	width: 100%;
+
+
+}
+
+.main {width:80%; margin:0 auto; text-align:left;}
 .main.bg {background-color:#FFF;}
 
 .noscreen {display:none;}
@@ -44,9 +53,8 @@ body {background:#2f2f2f; color:#222;}
 	float:left;
 	font-size:x-small;
 	line-height:200%;
-	margin:0 0 2em;
-	padding:0 0 0 20em;
-	width:18.5em;
+	width:9%;
+	margin:0 auto; text-align:left;
 }
 
 #menu strong {

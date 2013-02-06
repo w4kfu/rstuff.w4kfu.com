@@ -1,43 +1,56 @@
-
-h1, h2, h3, h4, h5, h6 {margin:15px 0 10px 0;}
-h1 {font-size:180%;}
-h2 {margin:5px 0; font-size:160%;}
-h3 {font-size:120%;}
-h4, h5 {font-size:100%;}
-
-body, div, span, div.paragraph, a, img, ul, ol, li, caption, table, thead, tbody, tfoot, tr, th, td, form, fieldset, legend, label, dl, dt, dd, blockquote, applet, object, h1, h2, h3, h4, h5 {border:0;}
-body, div, span, p, a, img, ul, ol, li, caption, table, thead, tbody, tfoot, tr, th, td, form, fieldset, legend, label, dl, dt, dd, blockquote, applet, object, h1, h2, h3, h4, h5 {border:0;}
-body {font:0.8em/1.5 "arial", serif; text-align:center;}
-body {background:#2f2f2f; color:#222;}
-
-#contener {
-
-	margin: 0 auto;
-	text-align: left;
-	width: 100%;
-
-
+body, html, #menu, img, a img, form, fieldset {
+	margin:0;
+	padding:0;
+	font-size: 12px;
+	text-align:center;
+	font-family: Verdana, "Bitstream Vera Sans", "Lucida Grande", sans-serif;
+}
+a {
+	font-weight:normal;
+	text-decoration:none;
 }
 
-.main {width:70%; margin:0 auto; text-align:left;}
-.main.bg {background-color:#FFF;}
+h1 { margin-left: 0px;
+}
 
-.noscreen {display:none;}
-#content {padding:25px 20px; min-height:400px; height:auto !important; height:400px;}
-.content-in {padding:10px 15px;}
+h2 { margin-left: 10px;
+}
 
-.box {min-height:1px;}
-.box {_height:1%;}
-.box:after {display:block; visibility:hidden; clear:both; line-height:0; font-size:0; content:".";}
-.box ul {margin:15px 0; padding:0; list-style:none;}
-.box ul li {margin:0; padding:2px 0 3px 0;}
+h3 { margin-left: 20px;
+}
+
+h4 { margin-left: 30px;
+}
+
+blockquote { 
+    font-family:Georgia,"Times New Roman";
+    background:#fffff9 none repeat scroll 0 0;
+    border: 1px dotted #dbdbdb; 
+    margin:0.5em 2em;
+    padding:0.5em;
+    text-align:left;
+    width:85%;
+}
+
+pre span.Comment {
+	color: #7f7f7f;
+	font-style: italic;
+}
+
+.separator-story {
+	border-top: 1px #CCCCCC solid;
+}
+
+.comment {
+	border-bottom: 1px #CCCCCC solid;
+}
 
 #header {
 	margin:0;
-	background:#444 none repeat scroll 0 0;
+	background:#395B2B none repeat scroll 0 0;
 	border-bottom:12px solid #CCCCCC;
 	font-size:2.25em;
-	padding:5px 10px 5px;
+	padding:5px 83px 5px;
 	color:#FFFFFF;
 }
 #header a {
@@ -49,16 +62,15 @@ body {background:#2f2f2f; color:#222;}
 }
 
 #menu {
-	color:#000;
+	color:#333;
 	float:left;
 	font-size:x-small;
 	line-height:200%;
-	width:20em;
-	margin:0 auto; text-align:left;
+	width:19.2em;
 }
 
 #menu strong {
-	color:#FFF;
+	color:#000;
 }
 #menu a:hover, #content a:hover {
 	color:#8b2;
@@ -70,58 +82,35 @@ body {background:#2f2f2f; color:#222;}
 	text-decoration:none;	
 }
 .menu{
-background-color:#444;
-border:2px solid #111;
+background-color:#CCC;
 font-weight:normal;
 }
 .sousmenu{
-background-color:#000;
-border:2px solid #111;
+background-color:#CCC;
 color:#000;
 padding:2px;
 text-transform:uppercase;
+background:transparent url(/fleche.png) no-repeat scroll 0 8px;
 }
 
 .menu a{
-color:#FFF;
+color:#000;
 }
 .sousmenu a{
-color:#CCC;
+color:#000;
 }
 .menu a:hover, .sousmenu a:hover, .menu a:active, .sousmenu a:active, .menu a:focus, .sousmenu a:focus{
 	color:#8b2;
 }
 
-#footer {clear:both; padding:15px;font:12px Verdana, Arial, Helvetica, sans-serif;}
-#footer {background:#2f2f2f; color:#FFF;}
-#footer a {color:#AFAFAF;}
-#footer a:hover {color:#FFF;}
-
-pre {
-	background:#F5F5F5 none repeat scroll 0 0;
-	border:1px solid #808080;
-	margin:0.5em 2em;
-	overflow:auto;
-	padding:0.5em;
-	text-align:left;
-	width:85%;
-	font-family:"Courier New",monospace;
-	font-size:1.1em;	
+#footer a {
+	color:#000;
+}
+#footer a:hover
+{
+	color:#fff;
 }
 
-pre code  {
-	color:#330000;
-}
-.ida {
-	background:#2d2d2d none repeat scroll 0 0;
-	border:5px solid #808080;
-	margin:0.5em 2em;
-	overflow:auto;
-	padding:0.5em;
-	text-align:left;
-	width:85%;	
-	font-family:"Lucida Console",monospace;
-}
 
 #content ul
 {
@@ -131,6 +120,152 @@ pre code  {
 
 #content li
 {
-	background:transparent url(/lili.gif) no-repeat scroll 0px 8px;
+	background:transparent url(/lili.gif) no-repeat scroll 0px 5px;
 	padding-left:10px;
+}
+
+#menu ul
+{
+	list-style-type:none;
+	padding:0;
+}
+
+#menu li
+{
+	margin-top:0.15em;
+	padding-left:10px;
+}
+
+#menu li.syndicate {
+	background:transparent none repeat scroll 0 0;
+	padding-left:0px;
+}
+
+#menu li.link {
+    list-style-type:square;
+    margin-left:15px;
+    padding-left:0px;
+}
+
+a.feed {
+	background:transparent url(/resources/feed.png) no-repeat scroll left center;
+	padding-left:16px;
+}
+
+#content {
+	background:transparent none repeat scroll 0 0;
+	margin:0px 0 0 16em;
+	padding:1px 4em 1em 2em;
+	border:0px;
+	text-align:justify;
+}
+
+#content h2.storytitle {
+	background:transparent none repeat scroll 0 0;
+	color:#FFF;
+	font-weight:bold;
+	margin:0px;
+	padding:0;
+}
+
+#content h2.storytitle a:link, #content h2.storytitle a:visited {
+	color:#000;
+	font-weight:normal;
+}
+#content h2.storytitle a:hover, #content h2.storytitle a:focus {
+	color:#8b2;
+}
+
+.date {
+	background:transparent url(/resources/date.png) no-repeat scroll 0 50%;
+	color:#000000;
+	font-size:1em;
+	margin-top:10px;
+	padding-left:24px;
+	text-align:left;
+	text-transform:lowercase;
+
+
+}
+
+img {
+	border:0;
+}
+.tags {
+	margin:0 0 1.5em;
+	padding:0;
+	text-align:left;
+}
+
+.tags a {
+	background:#FFFFFF url(/resources/tag.png) no-repeat scroll 0 50%;
+	color:#777777;
+	padding:0 0 0 12px;
+}
+.tags a:hover {
+	color:#AA0088;
+}
+
+.tagcloud {
+	border: 1px;
+}
+
+#footer {
+	background:#395B2B repeat scroll 0 0;
+	border-top:3px solid #CCCCCC;
+	clear:both;
+	color:#FFFFFF;
+	font-size:x-small;
+	line-height:100%;
+	margin:2em 0 0;
+	padding:3px 10px 10px;
+	text-align:right;
+}
+pre {
+	background:#F5F5F5 none repeat scroll 0 0;
+	border:1px solid #808080;
+	margin:0.5em 2em;
+	overflow:auto;
+	padding:0.5em;
+	text-align:left;
+	width:85%;
+}
+
+pre code  {
+	color:#330000;
+	font-family:"Courier New",monospace;
+	font-size:1.1em;
+}
+#content h2, #content h3, #content h4, #content h5 {
+	color:#000000;
+}
+
+blockquote {
+	white-space: pre-wrap;
+}
+
+.comments {
+	background:transparent url(/resources/comm.png) no-repeat scroll 0 center;
+	margin-top:0.15em;
+	padding-left:20px;
+}
+
+#contener {
+
+	margin: 0 auto;
+	text-align: left;
+	width: 100%;
+
+
+}
+
+.ida {
+	background:#2d2d2d none repeat scroll 0 0;
+	border:5px solid #808080;
+	margin:0.5em 2em;
+	overflow:auto;
+	padding:0.5em;
+	text-align:left;
+	width:85%;	
+	font-family:"Lucida Console",monospace;
 }

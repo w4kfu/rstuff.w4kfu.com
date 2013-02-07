@@ -31,14 +31,15 @@ All IDA offset are from version 1.9
 * +0x00 : Magic 	(DWORD) 		// "EAR" : 0x00524145
 * +0x04 : SizeL		(DWORD)			// Little Endian
 * +0x08 : Unknow	(WORD)
-* +0x0A : SizeB		(DWORD)			// Big Endian
-* +0x0E : DATA		(BYTE[SizeB])
+* +0x0A : SizeB		(WORD + BYTE)	// Big Endian
+* +0x0D : DATA		(BYTE[SizeB])
 
 Data are compressed and use the following algorithm.
 
 <div class="ida">
-0080273C ; int __stdcall xan_unpack(char *DstBuffer, char *SrcBuffer, int SizeBuffer)
-</div>
+<span style="white-space: pre; font-family: Lucida Console; color: #aaaaaa; background: #2d2d2d">
+<span style="color:#ffecbb">; int __stdcall xan_unpack(char *DstBuffer, char *SrcBuffer, int SizeBuffer)
+</span><span style="color:#666666">.text:0080273C </span><span style="color:#9dd600">xan_unpack proc near</span></span></div>
 
 Original algorithm (Wing Commander/Xan Video Decoder) can be found at the following [address][1].
 

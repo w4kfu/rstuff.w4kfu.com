@@ -1,0 +1,50 @@
+$$ title
+
+Command and Conquer 3
+
+$$ body
+
+# Command and Conquer 3
+
+All IDA offset are from version 1.9
+
+## Type format
+
+* 1 : "EAR"
+* 2 : "NOX"
+* 3 : "ZL1"
+* 4 : "ZL2"
+* 5 : "ZL3"
+* 6 : "ZL4"
+* 7 : "ZL5"
+* 8 : "ZL6"
+* 9 : "ZL7"
+* 10 : "ZL8"
+* 11 : "ZL9"
+* 12 : "EAB"
+* 13 : "EAH"
+
+## .map format (Case 1 "EAR")
+
+### Header
+
+* +0x00 : Magic 	(DWORD) 		// "EAR" : 0x00524145
+* +0x04 : SizeL		(DWORD)			// Little Endian
+* +0x08 : Unknow	(WORD)
+* +0x0A : SizeB		(DWORD)			// Big Endian
+* +0x0E : DATA		(BYTE[SizeB])
+
+Data are compressed and use the following algorithm.
+
+<div class="ida">
+0080273C ; int __stdcall xan_unpack(char *DstBuffer, char *SrcBuffer, int SizeBuffer)
+</div>
+
+Original algorithm (Wing Commander/Xan Video Decoder) can be found at the following [address][1].
+
+
+
+
+
+
+[1]:http://cekirdek.pardus.org.tr/~ismail/ffmpeg-docs/xxan_8c-source.html
